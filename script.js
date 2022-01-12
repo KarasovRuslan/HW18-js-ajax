@@ -34,11 +34,6 @@ const postJSON = function (url, data) {
                 reject(status);
             }
         };
-
-        xhr.onerror = function (e) {
-            reject('Error fetching ' + url);
-        };
-
         xhr.send(JSON.stringify(data));
     });
 };
@@ -57,11 +52,6 @@ const putJSON = function (url, data) {
                 reject(status);
             }
         };
-
-        xhr.onerror = function (e) {
-            reject('Error fetching ' + url);
-        };
-
         xhr.send(JSON.stringify(data));
     });
 };
@@ -79,10 +69,6 @@ const deleteJSON = function (url) {
             } else {
                 reject(status);
             }
-        };
-
-        xhr.onerror = function (e) {
-            reject('Error fetching ' + url);
         };
         xhr.send(null);
     });
