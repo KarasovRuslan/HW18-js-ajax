@@ -1,0 +1,128 @@
+body{
+	background-color: #32c655;
+	margin: 0;
+    padding-top: 300px;
+}
+
+.container{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+.user {
+    width: auto;
+    padding: 10px 15px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0px 2px 10px 3px orange;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input_user{
+	font-size: 20px;
+	margin-bottom: 10px;
+    padding: 12px 5px;
+    border-radius: 5px;
+    line-height: 16px;
+	border: 0;
+	outline: none;
+	background-color: #e9e9e9a1;
+}
+
+.input_user::placeholder {
+	color: gray;
+}
+
+.input_user:focus {
+	box-shadow: 0px 0px 0px 2px green;
+}
+
+.appButton{
+	background-color: rgb(5, 211, 5);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    padding: 12px 5px;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+	text-align: center;
+}
+
+.findButton{
+	background-color: rgb(5, 211, 5);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    padding: 12px 5px;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+	text-align: center;
+    margin-top: 7px;
+}
+
+.appButton::placeholder {
+	color: white;
+}
+
+.findButton::placeholder {
+	color: white;
+}
+
+
+.deleteButton{
+    float: right;
+    clear: right;
+	background-color: red;
+	color: white;
+	text-align: center;
+	text-transform: uppercase;
+	line-height: 10px;
+}
+
+.statusButton{
+    float: right;
+    clear: right;
+	background-color: skyblue;
+	color: white;
+	text-align: center;
+	text-transform: uppercase;
+	line-height: 10px;
+}
+
+li {
+    margin-top: 5px;
+    margin-right: 5px;
+    line-height: 16px;
+	word-wrap: break-word;
+	text-align: start;
+}
+
+li:last-child {
+    margin-bottom: 5px;
+}
+
+.notDone{
+	background-color: yellow;
+}
+
+.done{
+	background-color: #32c655;
+}
+
+.taskInfo {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    background-color: white;
+    border-radius: 3px;
+    justify-content: center;
+}
