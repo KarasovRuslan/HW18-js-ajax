@@ -34,6 +34,9 @@ const postJSON = function (url, data) {
                 reject(status);
             }
         };
+        xhr.onerror = function (e) {
+            reject('Error' + url);
+        };
         xhr.send(JSON.stringify(data));
     });
 };
@@ -51,6 +54,9 @@ const putJSON = function (url, data) {
             } else {
                 reject(status);
             }
+        };
+        xhr.onerror = function (e) {
+            reject('Error' + url);
         };
         xhr.send(JSON.stringify(data));
     });
@@ -70,6 +76,9 @@ const deleteJSON = function (url) {
                 reject(status);
             }
         };
+        xhr.onerror = function (e) {
+            reject('Error' + url);
+        };
         xhr.send(null);
     });
 };
@@ -77,6 +86,15 @@ const deleteJSON = function (url) {
 class TodoList {
     constructor(el) {
         this.el = el;
+        this.el.addEventListener('click', (event) => {
+            let target = event.target;
+            let id = target.closest('li').dataset.id;
+            if (target.classList.contains('statusButton')) {
+              createLi.changeStatus(id);
+            } else if (target.classList.contains('deleteButton')) {
+              createLi.removeTodo(id);
+            }
+          })
     }
     async getData() {
         try {
@@ -86,10 +104,10 @@ class TodoList {
         }
     }
 
-    render() {
+    async render() {
         let lis = '';
-        this.getData()
-        .then((data) => {
+        try {
+            let data = await this.getData();
             for (let el of data) {
                 if (!el) {
                     return;
@@ -98,8 +116,10 @@ class TodoList {
                 lis += `<li data-id="${el.id}" class ="${colorToDo}">${el.task}<button class="statusButton">Change status</button><button class="deleteButton">Delete</button></li>`;
             }
             this.el.innerHTML = lis;
-        })
-        .catch((error) => console.log(error));
+        }
+        catch(error) {
+            console.log(new Error (error));
+        }
     }
 
     async addTodo() {
@@ -109,15 +129,16 @@ class TodoList {
                     task: input.value,
                     complited: false,
                 });
+                this.render()
             }
         } catch (err) {
-            console.log(err);
+            console.log(new Error(err));
         }
     }
 
     async changeStatus(id) {
         try {
-        let data = await this.getData();
+            let data = await this.getData();
             for (let el of data) {
                 if (el.id == id) {
                     el.complited = !el.complited;
@@ -128,6 +149,7 @@ class TodoList {
                         complited: el.complited,
                     });
                 }
+                this.render()
             }
         } catch (error) {
             console.log(new Error(error));
@@ -147,6 +169,7 @@ class TodoList {
                     deleteJSON(`${requestURL}/${id}`);
                     task.remove();
                 }
+                this.render()
             }
         } catch (error) {
             console.log(new Error(error));
@@ -161,15 +184,5 @@ createBtn.addEventListener('click', function () {
     if (input.value) {
         createLi.addTodo();
         input.value = '';
-    }
-})
-
-list.addEventListener('click', (event) => {
-    let target = event.target;
-    let id = target.parentNode.dataset.id;
-    if (target.classList.contains('statusButton')) {
-        createLi.changeStatus(id);
-    } else if (target.classList.contains('deleteButton')) {
-        createLi.removeTodo(id);
     }
 })
