@@ -179,7 +179,6 @@ class TodoList {
 
 let createLi = new TodoList(list);
 createLi.render();
-
 createBtn.addEventListener('click', function () {
     if (input.value) {
         createLi.addTodo();
